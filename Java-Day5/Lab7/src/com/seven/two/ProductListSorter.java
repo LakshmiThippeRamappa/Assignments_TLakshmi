@@ -1,0 +1,48 @@
+package com.seven.two;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+/*
+ 7.2 : Modify the above program to store product names in anArrayList, sort strings available in an
+arrayList and display the names using for-each loop.
+ */
+public class ProductListSorter {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        ArrayList<String> products = new ArrayList<>();
+
+        System.out.print("Enter number of products: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+        
+        System.out.println("Enter product names:");
+        for (int i = 0; i < n; i++) {
+            System.out.print("Product " + (i + 1) + ": ");
+            products.add(sc.nextLine());
+        }
+
+        Collections.sort(products);
+
+        System.out.println("\nSorted Product Names:");
+        for (String product : products) {
+            System.out.println(product);
+        }
+
+        sc.close();
+    }
+}
+
+/*
+Enter number of products: 3
+Enter product names:
+Product 1: lap
+Product 2: phone
+Product 3: speaker
+
+Sorted Product Names:
+lap
+phone
+speaker
+*/
