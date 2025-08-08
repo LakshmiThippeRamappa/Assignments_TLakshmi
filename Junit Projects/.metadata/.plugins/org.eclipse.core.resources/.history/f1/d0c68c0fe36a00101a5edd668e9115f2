@@ -1,0 +1,19 @@
+package com.wipro.Project;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+public class CalculatorTest {
+	Calculator cal = new Calculator();
+	@Test
+	public void addTest() {
+		assertEquals(35,cal.add(12, 23));
+	}
+	
+	@Test
+	public void mulTest() {
+		assertEquals(6,cal.add(3, 2));
+	}
+	
+}

@@ -1,0 +1,28 @@
+package mypack;
+public class Money {
+	private int fAmount; 
+    private String fCurrency;
+
+    public Money(int amount, String currency) 
+    {
+        fAmount = amount;
+        fCurrency = currency;
+    }
+    
+    public int amount()
+    {
+    	return this.fAmount;
+    }
+     
+    public String currency()
+    {
+    	return this.fCurrency;
+    }
+
+    public Money add(Money m) 
+    { 
+        return new Money(amount()+m.amount(), currency()); 
+    }
+
+
+}

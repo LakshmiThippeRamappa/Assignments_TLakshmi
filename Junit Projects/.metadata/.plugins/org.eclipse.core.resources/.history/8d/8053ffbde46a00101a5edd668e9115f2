@@ -1,0 +1,20 @@
+package com.wipro;
+import static org.junit.Assert.*;
+//import org.junit.Assert;
+
+import org.junit.Test;
+
+public class TestJunit {
+
+	String message = "Hello World";
+	
+	MessageUtil messageUtil = new MessageUtil(message);
+	
+	@Test
+	public void testPrintMessage()
+	{
+		//Assert.assertEquals(message, messageUtil.printMessage());
+		assertEquals(message, messageUtil.printMessage());
+		//assertEquals("My Name", messageUtil.printMessage());
+	}
+}
