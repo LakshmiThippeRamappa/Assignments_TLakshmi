@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order List</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h2>Order List</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Customer ID</th>
+            <th>Product IDs</th>
+            <th>Order Date</th>
+        </tr>
+        <tr th:each="o : ${orders}">
+            <td th:text="${o.id}"></td>
+            <td th:text="${o.customerId}"></td>
+            <td th:text="${o.productIds}"></td>
+            <td th:text="${o.orderDate}"></td>
+        </tr>
+    </table>
+</body>
+</html>

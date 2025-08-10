@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Order</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h2>Add Order</h2>
+    <form th:action="@{/order/save}" th:object="${order}" method="post">
+        <label>Customer ID:</label><br/>
+        <input type="number" th:field="*{customerId}" required /><br/>
+
+        <label>Product IDs (comma-separated):</label><br/>
+        <input type="text" th:field="*{productIds}" required /><br/>
+
+        <label>Order Date (YYYY-MM-DD):</label><br/>
+        <input type="text" th:field="*{orderDate}" placeholder="2025-08-04" required /><br/>
+
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

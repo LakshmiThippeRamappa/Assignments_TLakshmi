@@ -1,0 +1,9 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org">
+<head><title>Add Customer</title><link rel="stylesheet" href="/styles.css"></head>
+<body><h2>Add Customer</h2>
+<form th:action="@{/customer/save}" th:object="${customer}" method="post">
+ name: <input type="text" th:field="*{name}" /><br/>
+ email: <input type="email" th:field="*{email}" /><br/>
+ password: <input type="password" th:field="*{password}" /><br/>
+ <button type="submit">Save</button>
+</form></body></html>
