@@ -1,0 +1,25 @@
+package com.example.order_service.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.client.RestTemplate;
+
+import com.example.order_service.dto.CustomerDTO;
+
+@RestController
+@RequestMapping("/api/customers")
+public class CustomerProxyController {
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	@GetMapping
+    public ResponseEntity<CustomerDTO[]> getAllCustomers() {
+        CustomerDTO[] customers = restTemplate.getForObject(
+                "http://customer-service/api/customers",
+                CustomerDTO[].class);
+        return ResponseEntity.ok(customers);
+    }
+
+}

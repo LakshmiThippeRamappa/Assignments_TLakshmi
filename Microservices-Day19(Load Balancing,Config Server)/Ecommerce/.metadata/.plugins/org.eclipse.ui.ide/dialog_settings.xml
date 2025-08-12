@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="SmartImportWizard">
+		<item key="SmartImportRootWizardPage.STORE_HIDE_ALREADY_OPEN" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
+		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
+		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\laksh\Music\Microservices\Ecommerce\Info About Project"/>
+			<item value="C:\Users\laksh\Music\Microservices\Ecommerce\payment-service"/>
+			<item value="C:\Users\laksh\Music\Microservices\Ecommerce\customer-service"/>
+			<item value="C:\Users\laksh\Music\Microservices\Ecommerce\product-service"/>
+			<item value="C:\Users\laksh\Music\Microservices\Ecommerce\api-gateway"/>
+			<item value="C:\Users\laksh\Music\Microservices\Ecommerce\eureka-server"/>
+			<item value="C:\Users\laksh\Music\Microservices\Ecommerce\order-service"/>
+			<item value="C:\Users\laksh\Music\Microservices\Practice\customer-service"/>
+			<item value="C:\Users\laksh\Music\Microservices\Practice\product-service"/>
+			<item value="C:\Users\laksh\Music\Microservices\Practice\movie-service"/>
+			<item value="C:\Users\laksh\Music\Microservices\Practice\api-gateway"/>
+			<item value="C:\Users\laksh\Music\Microservices\Practice\eureka-server"/>
+		</list>
+		<section name="SmartImportWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="234"/>
+			<item key="DIALOG_Y_ORIGIN" value="199"/>
+			<item key="DIALOG_WIDTH" value="935"/>
+			<item key="DIALOG_HEIGHT" value="726"/>
+			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		</section>
+	</section>
+	<section name="CleanDialogSettings">
+		<item key="TOGGLE_SELECTED" value="true"/>
+		<item key="DIALOG_WIDTH" value="662"/>
+		<item key="DIALOG_HEIGHT" value="434"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+</section>

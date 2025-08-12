@@ -1,0 +1,5 @@
+spring.application.name=school-service
+server.port=3001
+
+spring.config.import=optional:configserver:
+spring.cloud.config.uri=http://localhost:8888

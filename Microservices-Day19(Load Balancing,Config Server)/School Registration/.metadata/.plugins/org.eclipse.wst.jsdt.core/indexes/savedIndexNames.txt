@@ -1,0 +1,4 @@
+INDEX VERSION 1.4+C:\Users\laksh\Music\Microservices\School Registration\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1354959185.index
+1050042363.index
+3066948313.index

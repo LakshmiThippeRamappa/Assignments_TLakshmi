@@ -1,0 +1,74 @@
+package com.example.order_service.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.example.order_service.dto.CustomerDTO;
+import com.example.order_service.model.Order;
+import com.example.order_service.service.OrderService;
+
+@RestController
+@RequestMapping("/api/orders")
+public class AppController {
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	 @Autowired
+	    private Environment environment;
+	
+	@Autowired
+	OrderService orderService;
+	
+	@PostMapping
+    public ResponseEntity<Order> createOrder(@RequestParam Long customerId,@RequestBody Order order) {
+		Order createdOrder = orderService.createOrder(customerId, order);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdOrder);
+    }
+	
+	//Already there above
+//	@PostMapping
+//	public Order createCustomer(@RequestBody Order order) {
+//		return orderService.saveOrder(order);
+//	}
+	
+	@GetMapping
+	public List<Order> getAllOrder(){
+		return orderService.getAllOrders();
+	}
+	
+	@PostMapping("/place/{customerId}")
+	public String placeOrder(@PathVariable Long customerId) {
+		return orderService.placeOrder(customerId);
+		
+	}
+	
+	@GetMapping("/{productId}/qty/{quantity}")
+	public Order createOrderWithProduct(@PathVariable Long productId, @PathVariable Integer quantity) {
+		return orderService.createOrderWithProduct(productId, quantity);
+	}
+	
+	@GetMapping("/load-balance-test")
+    public Map<String, String> loadBalanceTest() {
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Order Service is responding");
+        response.put("port", environment.getProperty("local.server.port"));
+        return response;
+    }
+	
+	
+}
