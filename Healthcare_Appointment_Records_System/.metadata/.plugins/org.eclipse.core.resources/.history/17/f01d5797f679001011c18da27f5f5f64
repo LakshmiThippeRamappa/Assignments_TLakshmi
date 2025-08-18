@@ -1,0 +1,5 @@
+package com.example.appointment_service.web;
+
+public class ApiErrorHandler {
+
+}

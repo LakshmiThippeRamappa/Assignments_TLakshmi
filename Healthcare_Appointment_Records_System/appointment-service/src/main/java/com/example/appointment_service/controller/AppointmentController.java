@@ -1,0 +1,66 @@
+package com.example.appointment_service.controller;
+
+import com.example.appointment_service.dto.AppointmentRequest;
+import com.example.appointment_service.dto.AppointmentResponse;
+import com.example.appointment_service.dto.RescheduleRequest;
+import com.example.appointment_service.service.AppointmentService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/appointments")
+public class AppointmentController {
+
+    private final AppointmentService service;
+
+    public AppointmentController(AppointmentService service) {
+        this.service = service;
+    }
+
+    /** Book an appointment */
+    @PostMapping
+    public ResponseEntity<AppointmentResponse> book(@Valid @RequestBody AppointmentRequest request) {
+        return ResponseEntity.ok(service.book(request));
+    }
+
+    /** Reschedule existing appointment */
+    @PutMapping("/{id}/reschedule")
+    public ResponseEntity<AppointmentResponse> reschedule(@PathVariable Long id,
+                                                          @Valid @RequestBody RescheduleRequest request) {
+        return ResponseEntity.ok(service.reschedule(id, request));
+    }
+
+    /** Cancel appointment */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> cancel(@PathVariable Long id) {
+        service.cancel(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    /** Get appointment by id */
+    @GetMapping("/{id}")
+    public ResponseEntity<AppointmentResponse> get(@PathVariable Long id) {
+        return ResponseEntity.ok(service.get(id));
+    }
+
+    /** List all appointments */
+    @GetMapping
+    public ResponseEntity<List<AppointmentResponse>> listAll() {
+        return ResponseEntity.ok(service.listAll());
+    }
+
+    /** List appointments by doctor */
+    @GetMapping("/doctor/{doctorId}")
+    public ResponseEntity<List<AppointmentResponse>> byDoctor(@PathVariable Long doctorId) {
+        return ResponseEntity.ok(service.listByDoctor(doctorId));
+    }
+
+    /** List appointments by patient */
+    @GetMapping("/patient/{patientId}")
+    public ResponseEntity<List<AppointmentResponse>> byPatient(@PathVariable Long patientId) {
+        return ResponseEntity.ok(service.listByPatient(patientId));
+    }
+}

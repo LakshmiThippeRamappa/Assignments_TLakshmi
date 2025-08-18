@@ -1,0 +1,148 @@
+package com.example.appointment_service.service;
+
+import com.example.appointment_service.dto.AppointmentRequest;
+import com.example.appointment_service.dto.AppointmentResponse;
+import com.example.appointment_service.dto.RescheduleRequest;
+import com.example.appointment_service.entity.Appointment;
+import com.example.appointment_service.entity.AppointmentStatus;
+import com.example.appointment_service.exception.ConflictException;
+import com.example.appointment_service.exception.NotFoundException;
+import com.example.appointment_service.repository.AppointmentRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Service
+@Transactional
+public class AppointmentServiceImpl implements AppointmentService {
+
+    private final AppointmentRepository repo;
+
+    public AppointmentServiceImpl(AppointmentRepository repo) {
+        this.repo = repo;
+    }
+
+    @Override
+    public AppointmentResponse book(AppointmentRequest r) {
+        validateWindow(r.getStartTime(), r.getEndTime());
+        ensureDoctorFree(r.getDoctorId(), r.getStartTime(), r.getEndTime(), null);
+
+        Appointment appt = new Appointment(
+                r.getPatientId(),
+                r.getDoctorId(),
+                r.getStartTime(),
+                r.getEndTime(),
+                AppointmentStatus.CONFIRMED,
+                r.getReason()
+        );
+
+        return toResponse(repo.save(appt));
+    }
+
+    @Override
+    public AppointmentResponse reschedule(Long id, RescheduleRequest r) {
+        validateWindow(r.getNewStartTime(), r.getNewEndTime());
+
+        Appointment appt = repo.findById(id)
+                .orElseThrow(() -> new NotFoundException("Appointment not found: " + id));
+
+        if (appt.getStatus() == AppointmentStatus.CANCELED) {
+            throw new ConflictException("Cannot reschedule a canceled appointment");
+        }
+
+        ensureDoctorFree(appt.getDoctorId(), r.getNewStartTime(), r.getNewEndTime(), id);
+
+        appt.setStartTime(r.getNewStartTime());
+        appt.setEndTime(r.getNewEndTime());
+
+        return toResponse(repo.save(appt));
+    }
+
+    @Override
+    public void cancel(Long id) {
+        Appointment appt = repo.findById(id)
+                .orElseThrow(() -> new NotFoundException("Appointment not found: " + id));
+        if (appt.getStatus() == AppointmentStatus.CANCELED) return;
+        appt.setStatus(AppointmentStatus.CANCELED);
+        repo.save(appt);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public AppointmentResponse get(Long id) {
+        return repo.findById(id).map(this::toResponse)
+                .orElseThrow(() -> new NotFoundException("Appointment not found: " + id));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<AppointmentResponse> listByDoctor(Long doctorId) {
+        return repo.findByDoctorId(doctorId).stream().map(this::toResponse).toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<AppointmentResponse> listByPatient(Long patientId) {
+        return repo.findByPatientId(patientId).stream().map(this::toResponse).toList();
+    }
+
+    /* ---------- helpers ---------- */
+
+    private void validateWindow(LocalDateTime start, LocalDateTime end) {
+        if (start == null || end == null) {
+            throw new ConflictException("Start and end time are required");
+        }
+        if (!end.isAfter(start)) {
+            throw new ConflictException("End time must be after start time");
+        }
+    }
+
+    /**
+     * Ensure doctor is free in the given window.
+     * If updating an existing appointment, pass its id to exclude it from conflict check.
+     */
+    private void ensureDoctorFree(Long doctorId, LocalDateTime start, LocalDateTime end, Long excludeAppointmentId) {
+        boolean overlap = repo.existsByDoctorIdAndStatusInAndStartTimeLessThanAndEndTimeGreaterThan(
+                doctorId,
+                List.of(AppointmentStatus.CONFIRMED, AppointmentStatus.PENDING),
+                end,
+                start
+        );
+
+        if (overlap) {
+            // If we’re rescheduling, we need to make sure the overlap isn’t with the same appointment.
+            if (excludeAppointmentId != null) {
+                // fetch all for fine check
+                var list = repo.findByDoctorId(doctorId);
+                boolean realOverlap = list.stream().anyMatch(a ->
+                        (a.getStatus() == AppointmentStatus.CONFIRMED || a.getStatus() == AppointmentStatus.PENDING) &&
+                        !a.getId().equals(excludeAppointmentId) &&
+                        a.getStartTime().isBefore(end) &&
+                        a.getEndTime().isAfter(start)
+                );
+                if (!realOverlap) return;
+            }
+            throw new ConflictException("Doctor already has an appointment in this time window");
+        }
+    }
+
+    private AppointmentResponse toResponse(Appointment a) {
+        return new AppointmentResponse(
+                a.getId(),
+                a.getPatientId(),
+                a.getDoctorId(),
+                a.getStartTime(),
+                a.getEndTime(),
+                a.getStatus(),
+                a.getReason()
+        );
+    }
+
+	@Override
+	public List<AppointmentResponse> listAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
