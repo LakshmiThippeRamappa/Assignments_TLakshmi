@@ -1,0 +1,13 @@
+INDEX VERSION 1.4+C:\Users\laksh\Music\Microservices\Online learning Platform\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3581695914.index
+3693709918.index
+2793823382.index
+4277344623.index
+2738529941.index
+1698827149.index
+1050042363.index
+1812180798.index
+4072528400.index
+2697877467.index
+3392093733.index
+2960399442.index

@@ -1,0 +1,80 @@
+package com.classroom.model;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "classrooms")
+public class Classroom {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Long courseId;     // ID from Course service
+    private Long teacherId;    // ID from User service
+
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+
+    // Simple attendee storage: comma-separated userIds (avoid mapping annotations)
+    private String attendeeIdsCsv;
+
+    private boolean active; // whether session is currently active
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(Long courseId) {
+		this.courseId = courseId;
+	}
+
+	public Long getTeacherId() {
+		return teacherId;
+	}
+
+	public void setTeacherId(Long teacherId) {
+		this.teacherId = teacherId;
+	}
+
+	public LocalDateTime getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
+	}
+
+	public LocalDateTime getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(LocalDateTime endTime) {
+		this.endTime = endTime;
+	}
+
+	public String getAttendeeIdsCsv() {
+		return attendeeIdsCsv;
+	}
+
+	public void setAttendeeIdsCsv(String attendeeIdsCsv) {
+		this.attendeeIdsCsv = attendeeIdsCsv;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
+}

@@ -1,0 +1,33 @@
+package com.user.security;
+
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
+import java.util.Date;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
+
+public class JwtUtil {
+    private static final String SECRET_KEY = "mysupersecretkeymysupersecretkey1234"; // 32+ chars
+    private static final long EXPIRATION_TIME = 1000 * 60 * 5; // 5 minutes
+
+    private static final Key KEY = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
+
+    // Generate token
+    public static String generateToken(String email, String role) {
+        return Jwts.builder()
+                .setSubject(email)
+                .claim("role", role)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(KEY, SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    // Validate token
+    public static Jws<Claims> validateToken(String token) throws JwtException {
+        return Jwts.parserBuilder()
+                .setSigningKey(KEY)
+                .build()
+                .parseClaimsJws(token);
+    }
+}

@@ -1,0 +1,32 @@
+package com.classroom.service;
+
+import org.springframework.stereotype.Service;
+
+import com.classroom.model.Attendance;
+import com.classroom.repository.AttendanceRepository;
+
+import java.util.List;
+
+@Service
+public class AttendanceService {
+    private final AttendanceRepository attendanceRepository;
+    public AttendanceService(AttendanceRepository attendanceRepository) {
+        this.attendanceRepository = attendanceRepository;
+    }
+
+    public Attendance markAttendance(Attendance a) {
+        return attendanceRepository.save(a);
+    }
+
+    public Attendance getById(Long id) { return attendanceRepository.findById(id).orElse(null); }
+    public List<Attendance> getAll() { return attendanceRepository.findAll(); }
+    public void delete(Long id) { attendanceRepository.deleteById(id); }
+
+    public List<Attendance> getByClassroomId(Long classroomId) {
+        return attendanceRepository.findByClassroomId(classroomId);
+    }
+
+    public List<Attendance> getByStudentId(Long studentId) {
+        return attendanceRepository.findByStudentId(studentId);
+    }
+}

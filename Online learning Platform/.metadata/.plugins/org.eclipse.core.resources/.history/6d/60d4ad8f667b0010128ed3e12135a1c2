@@ -1,0 +1,59 @@
+package com.user.controller;
+
+import com.user.model.User;
+import com.user.repository.UserRepository;
+import com.user.service.JwtService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
+
+	@Autowired
+    private UserRepository repo;
+    
+	@Autowired
+	private JwtService jwt;
+	
+    @Autowired
+	private AuthenticationManager authManager;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    
+    @PostMapping("/login")
+	public ResponseEntity<String> loginCheck(@RequestBody User u) {
+		
+		UsernamePasswordAuthenticationToken token = 
+				new UsernamePasswordAuthenticationToken(u.getUname(), u.getPwd());
+
+		try {
+			Authentication authenticate = authManager.authenticate(token);
+
+			if (authenticate.isAuthenticated()) {
+				String jwtToken = jwt.generateToken(u.getUname());
+				return new ResponseEntity<>(jwtToken, HttpStatus.OK);
+			}
+
+		} catch (Exception e) {
+			//logger
+		}
+
+		return new ResponseEntity<String>("Invalid Credentials", HttpStatus.BAD_REQUEST);
+	}
+
+    @PostMapping("/register")
+    public User register(@RequestBody User user) {
+    	 user.setPwd(passwordEncoder.encode(user.getPwd()));
+        return repo.save(user);
+    }
+}

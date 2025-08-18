@@ -1,0 +1,48 @@
+package com.classroom.controller;
+
+import org.springframework.web.bind.annotation.*;
+
+import com.classroom.model.Classroom;
+import com.classroom.service.ClassroomService;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/classrooms")
+public class ClassroomController {
+	private final ClassroomService classroomService;
+
+	public ClassroomController(ClassroomService classroomService) {
+		this.classroomService = classroomService;
+	}
+
+	@GetMapping
+	public List<Classroom> getAll() {
+		return classroomService.getAll();
+	}
+
+	@GetMapping("/{id}")
+	public Classroom get(@PathVariable Long id) {
+		return classroomService.getById(id);
+	}
+
+	@PostMapping
+	public Classroom create(@RequestBody Classroom c) {
+		return classroomService.create(c);
+	}
+
+	@PutMapping("/{id}")
+	public Classroom update(@PathVariable Long id, @RequestBody Classroom updated) {
+		return classroomService.update(id, updated);
+	}
+
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable Long id) {
+		classroomService.delete(id);
+	}
+
+	@GetMapping("/course/{courseId}")
+	public List<Classroom> getByCourse(@PathVariable Long courseId) {
+		return classroomService.getByCourseId(courseId);
+	}
+}

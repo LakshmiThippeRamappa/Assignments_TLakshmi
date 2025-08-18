@@ -1,0 +1,65 @@
+package com.assessment.controller;
+
+import org.springframework.web.bind.annotation.*;
+
+import com.assessment.model.Assessment;
+import com.assessment.service.AssessmentService;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/assessments")
+public class AssessmentController {
+	private final AssessmentService assessmentService;
+
+	public AssessmentController(AssessmentService assessmentService) {
+		this.assessmentService = assessmentService;
+	}
+
+	@GetMapping
+	public List<Assessment> getAll() {
+		return assessmentService.getAll();
+	}
+
+	@GetMapping("/{id}")
+	public Assessment get(@PathVariable Long id) {
+		return assessmentService.getById(id);
+	}
+
+	@PostMapping
+	public Assessment create(@RequestBody Assessment a) {
+		return assessmentService.create(a);
+	}
+
+	@PutMapping("/{id}")
+	public Assessment update(@PathVariable Long id, @RequestBody Assessment updated) {
+		return assessmentService.update(id, updated);
+	}
+
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable Long id) {
+		assessmentService.delete(id);
+	}
+
+	@GetMapping("/course/{courseId}")
+	public List<Assessment> getByCourse(@PathVariable Long courseId) {
+		return assessmentService.getByCourseId(courseId);
+	}
+
+	@Autowired
+	private AssessmentRepository assessmentRepository;
+
+	@Autowired
+	private AssessmentEventProducer assessmentEventProducer;
+
+	@PostMapping("/submit/{assignmentId}/{studentId}")
+	public String submitAssignment(@PathVariable Long assignmentId, @PathVariable Long studentId) {
+		// save submission (skipping details for simplicity)
+
+		// 🔥 Fire Kafka Event
+		assessmentEventProducer.sendAssignmentSubmittedEvent(assignmentId, studentId);
+
+		return "Assignment submitted!";
+	}
+
+}

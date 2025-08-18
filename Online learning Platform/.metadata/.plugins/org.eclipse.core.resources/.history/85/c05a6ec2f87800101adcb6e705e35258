@@ -1,0 +1,19 @@
+package com.classroom.model;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "attendances")
+public class Attendance {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Long classroomId;
+    private Long studentId;
+    private boolean present;
+    private LocalDateTime timestamp;
+
+    // Getters and Setters
+    
+}

@@ -1,0 +1,55 @@
+package com.user.controller;
+
+import com.user.model.User;
+import com.user.repository.UserRepository;
+import com.user.security.JwtUtil;
+
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
+
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    // LOGIN API
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        String password = request.get("password");
+
+        return userRepository.findByEmail(email)
+                .filter(user -> user.getPassword().equals(password)) // simple check (no encryption here for simplicity)
+                .map(user -> {
+                    String token = JwtUtil.generateToken(user.getEmail(), user.getRole());
+                    return ResponseEntity.ok(Map.of("token", token));
+                })
+                .orElse(ResponseEntity.status(401).body(Map.of("error", "Invalid credentials")));
+    }
+
+    // PROTECTED API (Token required)
+    @GetMapping("/profile")
+    public ResponseEntity<?> profile(@RequestHeader("Authorization") String authHeader) {
+        try {
+            String token = authHeader.replace("Bearer ", "");
+            var claims = JwtUtil.validateToken(token);
+
+            return ResponseEntity.ok(Map.of(
+                    "email", claims.getBody().getSubject(),
+                    "role", claims.getBody().get("role")
+            ));
+        } catch (ExpiredJwtException e) {
+            return ResponseEntity.status(401).body(Map.of("error", "Token expired"));
+        } catch (JwtException e) {
+            return ResponseEntity.status(401).body(Map.of("error", "Invalid token"));
+        }
+    }
+}

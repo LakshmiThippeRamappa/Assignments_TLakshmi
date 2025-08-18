@@ -1,0 +1,49 @@
+package com.assessment.service;
+
+import org.springframework.stereotype.Service;
+
+import com.assessment.model.Assessment;
+import com.assessment.repository.AssessmentRepository;
+
+import java.util.List;
+
+@Service
+public class AssessmentService {
+	private final AssessmentRepository assessmentRepository;
+
+	public AssessmentService(AssessmentRepository assessmentRepository) {
+		this.assessmentRepository = assessmentRepository;
+	}
+
+	public Assessment create(Assessment a) {
+		return assessmentRepository.save(a);
+	}
+
+	public Assessment getById(Long id) {
+		return assessmentRepository.findById(id).orElse(null);
+	}
+
+	public List<Assessment> getAll() {
+		return assessmentRepository.findAll();
+	}
+
+	public Assessment update(Long id, Assessment updated) {
+		return assessmentRepository.findById(id).map(existing -> {
+			existing.setTitle(updated.getTitle());
+			existing.setType(updated.getType());
+			existing.setQuestionsJson(updated.getQuestionsJson());
+			existing.setDueDate(updated.getDueDate());
+			existing.setMaxMarks(updated.getMaxMarks());
+			existing.setCourseId(updated.getCourseId());
+			return assessmentRepository.save(existing);
+		}).orElse(null);
+	}
+
+	public void delete(Long id) {
+		assessmentRepository.deleteById(id);
+	}
+
+	public List<Assessment> getByCourseId(Long courseId) {
+		return assessmentRepository.findByCourseId(courseId);
+	}
+}
