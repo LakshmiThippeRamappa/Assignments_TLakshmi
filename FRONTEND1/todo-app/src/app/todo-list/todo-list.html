@@ -1,0 +1,68 @@
+<p>todo-list works!</p>
+
+<div *ngIf="todos.length > 0">
+    <p>Total Todos: {{ todos.length }}</p>
+</div>
+<div *ngIf="todos.length == 0">
+    <p>No Todos. Add Todo and check</p>
+</div>
+
+<ul>
+    <li *ngFor="let todo of todos; let i = index">
+        <app-todo-item
+            [todo]="todo"
+            (remove)="remove(i)">
+        </app-todo-item>
+    </li>
+</ul>
+
+<select [(ngModel)]="role">
+    <option [ngValue]="UserRole.ADMIN">Admin</option>
+    <option [ngValue]="UserRole.MANAGER">Manager</option>
+    <option [ngValue]="UserRole.USER">User</option>
+    <option [ngValue]="UserRole.GUEST">Guest</option>
+</select>
+
+<div [ngSwitch]="role">
+    <p *ngSwitchCase="UserRole.ADMIN">Welcome Admin! You can manage users</p>
+    <p *ngSwitchCase="UserRole.MANAGER">Welcome Manager! You can view reports!</p>
+    <p *ngSwitchCase="UserRole.USER">Welcome User! You can access the profile!</p>
+    <p *ngSwitchDefault>Welcome Guest! Please Sign up or login</p>
+</div>
+
+<p [ngClass]="{'highlight':isImportant}">
+    This is a dynamic component
+</p>
+
+<p [ngStyle]="{'color':isActive ? 'green':'red', 'font-weight':'bold'}">
+    Status Message
+</p>
+
+<h2 appHighlight>Custom Directive Example</h2>
+<p> Normal Text</p>
+<p appHighlight>This text will be blue color b'coz of custom Directive</p>
+
+
+<button appTooltip="Click to submit the form">Submit</button>
+<br /><br />
+<p appTooltip="Click arrow to choose other options">Find & Replace</p>
+
+<p>{{today | date}}</p>
+<p>{{today | date:'fullDate'}}</p>
+<p>{{today | date:'dd/MM/yyyy'}}</p>
+
+<p>{{'angular' | uppercase}}</p>
+<p>{{'ANGULAR' | lowercase}}</p>
+
+<p>{{1500| currency:'USD'}}</p>
+<p>{{1500 | currency:'INR'}}</p>
+<p>{{3.14159 | number:'1.2-2'}}</p>
+<p>{{0.75 | percent}}</p>
+<pre>{{user | json}}</pre>
+
+<!--chaining pipes -->
+<p> {{today | date:'fullDate' | uppercase}}</p>
+
+<p>{{'Angular' | reverse}}</p>
+
+<img appTooltip="Lord Shiva Image." src="lord-shiva.jpg">
