@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add User</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    a { margin-right: 15px; text-decoration: none; color: blue; }
+    form { max-width: 400px; margin-top: 20px; }
+    label { display: block; margin-top: 10px; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; }
+    button { margin-top: 15px; padding: 10px; background: blue; color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <a href="/user">View User</a>
+  <a href="/edit-user">Edit User</a>
+  <a href="/delete-user">Delete User</a>
+
+  <h2>Add User</h2>
+  <form>
+    <label>Name:</label>
+    <input type="text" name="name" required [(ngModel)]="user.uname">
+
+    <label>Email:</label>
+    <input type="email" name="email" required [(ngModel)]="user.email">
+
+    <label>Password:</label>
+    <input type="password" name="password" required [(ngModel)]="user.pwd">
+
+    <label>Role:</label>
+    <select name="role" [(ngModel)]="user.role">
+      <option value="STUDENT">STUDENT</option>
+      <option value="TEACHER">TEACHER</option>
+    </select>
+
+    <button type="submit" name="submit" id="submit" (click)="onSubmit()">Add User</button>
+  </form>
+  <p>{{message}}</p> <br><br>
+<a href="">Back To Main Menu</a> <br/>
+</body>
+</html>

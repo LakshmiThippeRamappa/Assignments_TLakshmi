@@ -1,0 +1,28 @@
+<div class="edit-form">
+  <h2>✏️ Edit User</h2>
+
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <form (ngSubmit)="updateUser()" #userForm="ngForm">
+    <label>Username:</label>
+    <input type="text" [(ngModel)]="user.uname" name="uname" required />
+
+    <label>Email:</label>
+    <input type="email" [(ngModel)]="user.email" name="email" required />
+
+    <label>Password:</label>
+    <input type="password" [(ngModel)]="user.pwd" name="pwd" required />
+
+    <label>Role:</label>
+    <select [(ngModel)]="user.role" name="role" required>
+      <option value="STUDENT">Student</option>
+      <option value="TEACHER">Teacher</option>
+    </select>
+
+    <button type="submit" [disabled]="userForm.invalid">Update</button>
+    <button type="button" (click)="goToViewUser()">Cancel</button>
+
+  </form>
+  
+    <div class="success" *ngIf="message">{{ message }}</div>
+</div>

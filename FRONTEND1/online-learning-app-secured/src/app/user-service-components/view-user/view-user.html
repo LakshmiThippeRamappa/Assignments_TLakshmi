@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+  <header>
+    <p style="color: green; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:28px; text-align: center;">List of Users</p>
+  </header>
+
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+
+  <div class="summary">
+    Total Users: {{ users.length }}
+  </div>
+
+  <table *ngIf="users.length > 0" class="user-list">
+    <thead class="head1">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.uname }}</td>
+        <td>{{ user.email }}</td>
+        <!-- <td class="password-cell" title="{{ user.pwd }}">{{ user.pwd }}</td> -->
+         <td class="password-cell">
+  <span *ngIf="!user.showPwd">********</span>
+  <span *ngIf="user.showPwd">{{ user.pwd }}</span>
+  <button (click)="user.showPwd = !user.showPwd" class="toggle-btn">
+    {{ user.showPwd ? 'Hide' : 'Show' }}
+  </button>
+</td>
+
+        <td>{{ user.role }}</td>
+        <td>
+          <div class="actions">
+            <button class="edit-btn" (click)="editUser(user.id)">Edit</button>
+            <button class="delete-btn" (click)="deleteUser(user.id)">Delete</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <footer>
+    <a href="/">⬅ Back to Main Menu</a>
+  </footer>
+
+</body>
+</html>

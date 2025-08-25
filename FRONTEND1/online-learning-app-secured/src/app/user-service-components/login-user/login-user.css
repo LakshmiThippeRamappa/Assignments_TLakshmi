@@ -1,0 +1,32 @@
+.login-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 300px;
+  margin: 10px auto;
+  border-radius: 8px;
+}
+
+.login-container h2 {
+  text-align: center;
+}
+
+.login-container div {
+  margin-bottom: 10px;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 7px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.success { color: green; margin-top: 10px; }
+.error { color: red; margin-top: 10px; }

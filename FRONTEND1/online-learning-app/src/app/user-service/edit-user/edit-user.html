@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit User</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    a { margin-right: 15px; text-decoration: none; color: blue; }
+    form { max-width: 400px; margin-top: 20px; }
+    label { display: block; margin-top: 10px; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; }
+    button { margin-top: 15px; padding: 10px; background: green; color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <p>edit-user works!</p>
+  <a href="/user">View User</a>
+  <a href="/add-user">Add User</a>
+  <a href="/delete-user">Delete User</a>
+
+  <h2>Edit User</h2>
+  <form>
+    <label>User ID:</label>
+    <input type="text" name="id" placeholder="Enter User ID to edit">
+
+    <label>Name:</label>
+    <input type="text" name="name">
+
+    <label>Email:</label>
+    <input type="email" name="email">
+
+    <label>Password:</label>
+    <input type="password" name="password">
+
+    <label>Role:</label>
+    <select name="role">
+      <option value="STUDENT">STUDENT</option>
+      <option value="TEACHER">TEACHER</option>
+    </select>
+
+    <button type="submit">Update User</button>
+  </form>
+</body>
+</html>

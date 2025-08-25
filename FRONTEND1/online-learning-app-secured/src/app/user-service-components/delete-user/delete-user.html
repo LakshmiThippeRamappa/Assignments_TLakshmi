@@ -1,0 +1,17 @@
+<div class="delete-confirm-container">
+  <h2>Delete User</h2>
+
+  <p class="warning-text">
+    Are you sure you want to delete user with ID: <strong>{{ userId }}</strong>?
+  </p>
+
+  <!-- Success & Error Messages -->
+  <div *ngIf="message" class="alert success">{{ message }}</div>
+  <div *ngIf="errorMessage" class="alert error">{{ errorMessage }}</div>
+
+  <!-- Buttons -->
+  <div class="button-group">
+    <button class="btn-delete" (click)="deleteUser()">Confirm Delete</button>
+    <button class="btn-cancel" (click)="goToViewUser()">Cancel</button>
+  </div>
+</div>

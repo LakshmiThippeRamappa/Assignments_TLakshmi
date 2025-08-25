@@ -1,0 +1,34 @@
+.register-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 350px;
+  margin: 10px auto;
+  border-radius: 8px;
+}
+
+.register-container h2 {
+  text-align: center;
+}
+
+.register-container div {
+  margin-bottom: 10px;
+}
+
+.register-container input, select {
+  width: 100%;
+  padding: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 7px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.success { color: green; margin-top: 10px; }
+.error { color: red; margin-top: 10px; }
+
+hr { margin: 20px 0; }
