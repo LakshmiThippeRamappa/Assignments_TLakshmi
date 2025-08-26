@@ -1,0 +1,22 @@
+<h2>Delete Course</h2>
+
+<div class="confirm-box">
+  <p>Are you sure you want to delete course with ID: <b>{{ courseId }}</b>?</p>
+
+  <div *ngIf="!confirmDelete">
+    <button (click)="askConfirmation()">Yes, Delete</button>
+    <button (click)="cancel()">Cancel</button>
+  </div>
+
+  <div *ngIf="confirmDelete">
+    <p style="color:red;">⚠️ This action cannot be undone. Confirm delete?</p>
+    <button (click)="deleteCourse()">Confirm Delete</button>
+    <button (click)="cancel()">Cancel</button>
+  </div>
+
+  <p *ngIf="message" 
+     class="message" 
+     [ngClass]="{ 'success': message.includes('successfully'), 'error': message.includes('Error') }">
+    {{ message }}
+  </p>
+</div>

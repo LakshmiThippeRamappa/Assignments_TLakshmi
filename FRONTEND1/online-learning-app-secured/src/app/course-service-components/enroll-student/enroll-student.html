@@ -1,0 +1,14 @@
+<div class="enroll-container">
+  <h2>🎓 Enroll Student in Course <span class="highlight">#{{ courseId }}</span></h2>
+
+  <form (ngSubmit)="enroll()" class="enroll-form">
+    <div class="form-group">
+      <label for="studentId">Student ID</label>
+      <input [(ngModel)]="studentId" name="studentId" id="studentId" type="number" required />
+    </div>
+
+    <button type="submit" class="btn-submit">➕ Enroll</button>
+  </form>
+
+  <p *ngIf="message" class="success-message">{{ message }}</p>
+</div>

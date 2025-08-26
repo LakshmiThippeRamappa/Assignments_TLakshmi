@@ -1,0 +1,46 @@
+<h2 class="page-title">📘 Course Details</h2>
+
+<div *ngIf="course" class="course-card">
+  <div class="course-info">
+    <p><span class="label">ID:</span> {{ course.id }}</p>
+    <p><span class="label">Title:</span> {{ course.title }}</p>
+    <p><span class="label">Description:</span> {{ course.description }}</p>
+  </div>
+
+  <div class="teacher-section">
+    <h3>👨‍🏫 Teacher</h3>
+    <p>{{ course.teacher.uname }} <br>
+       <small>{{ course.teacher.email }}</small>
+    </p> 
+  </div>
+
+  <div class="students-section">
+    <h3>👥 Enrolled Students</h3>
+    <ul *ngIf="course.enrolledStudents && course.enrolledStudents.length > 0; else noStudents">
+      <li *ngFor="let student of course.enrolledStudents">
+        {{ student.uname }} <small>({{ student.email }})</small>
+      </li>
+    </ul>
+    <ng-template #noStudents>
+      <p class="empty">No students enrolled yet.</p>
+    </ng-template>
+  </div>
+
+
+  <!-- ✅ New Enroll Form -->
+  <div class="enroll-section">
+    <h3>➕ Enroll New Student</h3>
+    <form (ngSubmit)="enrollStudent()">
+      <label for="studentId">Student ID:</label>
+      <input id="studentId" type="number" [(ngModel)]="studentId" name="studentId" required>
+      <button type="submit" class="enroll-btn">Enroll</button>
+    </form>
+    <p *ngIf="message" class="status">{{ message }}</p>
+  </div>
+
+
+   <!-- Back Button -->
+  <div class="actions">
+    <button class="back-btn" routerLink="/view-courses">⬅ Back to Courses</button>
+  </div>
+</div>

@@ -9,9 +9,9 @@ import { User } from '../model/user.model';
 })
 export class UserService {
   
-   private baseUrl = 'http://localhost:5001/api/users';
+   private readonly baseUrl = 'http://localhost:5001/api/users';
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private readonly http: HttpClient, private readonly authService: AuthService) {}
 
   // No security
   getAllUsers(): Observable<User[]> {

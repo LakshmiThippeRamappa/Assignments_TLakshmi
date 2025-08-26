@@ -1,0 +1,60 @@
+h2 {
+  text-align: center;
+  color: #c0392b;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+button {
+  margin: 5px;
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+button:first-of-type {
+  background-color: #e74c3c;
+  color: white;
+}
+
+button:last-of-type {
+  background-color: #7f8c8d;
+  color: white;
+}
+
+.confirm-box {
+  text-align: center;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+}
+
+.message {
+  text-align: center;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.message.success {
+  color: green;
+}
+
+.message.error {
+  color: red;
+}

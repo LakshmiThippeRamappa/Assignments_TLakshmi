@@ -1,0 +1,32 @@
+<h2>All Courses</h2>
+<button routerLink="/add-course">Add Course</button>
+
+<!-- Show message if no courses -->
+<div *ngIf="courses.length === 0" class="no-courses">
+   No courses available. Please add a new course.
+</div>
+
+<!-- Show table only if courses exist -->
+<table *ngIf="courses.length > 0" border="1" width="100%">
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Teacher ID</th>
+    <th>Actions</th>
+  </tr>
+  <tr *ngFor="let course of courses">
+    <td>{{ course.id }}</td>
+    <td>{{ course.title }}</td>
+    <td>{{ course.description }}</td>
+    <td>{{ course.teacherId }}</td>
+    <td>
+      <button (click)="viewDetails(course.id!)">View-Course-Details</button>
+      <button (click)="editCourse(course.id!)">Edit</button>
+      <button (click)="deleteCourse(course.id!)">Delete</button>
+     <button class="enroll-btn" [routerLink]="['/enroll-student', course.id]">
+  Enroll Student
+</button>
+
+  </tr>
+</table>
