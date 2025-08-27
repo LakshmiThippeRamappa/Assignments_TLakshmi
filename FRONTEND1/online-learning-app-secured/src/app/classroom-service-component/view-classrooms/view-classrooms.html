@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+<div class="classroom-container">
+  <h2 class="title">📚 Classroom List</h2>
+
+  <!-- No classrooms -->
+  <div *ngIf="classrooms.length === 0" class="alert alert-warning">
+    No classrooms available. Please add one.
+  </div>
+
+  <!-- Classroom Table -->
+  <table *ngIf="classrooms.length > 0" class="classroom-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Course ID</th>
+        <th>Date & Time</th>
+        <th>Session Link</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let classroom of classrooms">
+        <td>{{ classroom.id }}</td>
+        <td>{{ classroom.courseId }}</td>
+        <td>{{ classroom.sessionDateTime | date:'medium' }}</td>
+        <td>
+          <a [href]="classroom.sessionLink" target="_blank" class="link">
+            Join Session
+          </a>
+        </td>
+        <td class="actions">
+  <button [routerLink]="['/classroom-details', classroom.id]" class="action-btn details">
+    <i class="fas fa-info-circle"></i> Details
+  </button>
+  <button [routerLink]="['/edit-classroom', classroom.id]" class="action-btn edit">
+    <i class="fas fa-edit"></i> Edit
+  </button>
+  <button [routerLink]="['/delete-classroom', classroom.id]" class="action-btn delete">
+    <i class="fas fa-trash"></i> Delete
+  </button>
+  <button [routerLink]="['/attendance-management', classroom.id, 'attendance']" class="action-btn attendance">
+    <i class="fas fa-user-check"></i> Attendance
+  </button>
+</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Add Classroom Button -->
+  <div class="add-classroom">
+    <a routerLink="/add-classroom" class="btn btn-lg btn-outline-success">
+      ➕ Add Classroom
+    </a>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="attendance-container">
+  <h2>📋 Attendance Management (Classroom {{ classroomId }})</h2>
+
+     <!-- Success & Error Messages -->
+  <div *ngIf="successMessage" class="alert success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="alert error">{{ errorMessage }}</div>
+
+  <!-- Mark Attendance Section -->
+  <div class="mark-section">
+    <h3>✅ Mark Attendance</h3>
+    <div class="input-group">
+      <input
+        type="number"
+        [(ngModel)]="studentId"
+        placeholder="Enter Student ID"
+      />
+      <button class="btn btn-success" (click)="markAttendance()">Mark Present</button>
+      <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+
+    </div>
+  </div>
+
+  <!-- Attendance List Section -->
+  <div class="list-section">
+    <h3>👥 Attendance List</h3>
+
+     <!-- Header row -->
+  <div class="list-header">
+    <span class="header-item">ID</span>
+    <span class="header-item">Name</span>
+    <span class="header-item">Email</span>
+    <span class="header-item">Status</span>
+  </div>
+
+    <!-- List items -->
+    <ul>
+      <li *ngFor="let att of attendanceList">
+        <span class="student-id">{{ att.student.id }}</span>
+        <span class="student-name">{{ att.student.uname }}</span>
+        <span class="student-email">{{ att.student.email }}</span>
+        <span class="status" [ngClass]="{ present: att.present, absent: !att.present }">
+            {{ att.present ? 'Present' : 'Absent' }}
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>

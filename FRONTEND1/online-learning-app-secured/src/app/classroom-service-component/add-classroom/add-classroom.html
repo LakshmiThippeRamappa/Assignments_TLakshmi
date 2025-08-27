@@ -1,0 +1,66 @@
+<div class="add-classroom-container">
+  <h2 class="form-title">➕ Add Classroom</h2>
+
+  <form (ngSubmit)="addClassroom()" #classroomForm="ngForm" class="classroom-form">
+    
+    <!-- Course ID -->
+    <div class="form-group">
+      <label for="courseId">Course ID</label>
+      <input
+        type="number"
+        id="courseId"
+        [(ngModel)]="classroom.courseId"
+        name="courseId"
+        required
+        #courseId="ngModel"
+        placeholder="Enter Course ID"
+      />
+      <div class="error" *ngIf="courseId.invalid && courseId.touched">
+        Course ID is required.
+      </div>
+    </div>
+
+    <!-- Session Date & Time -->
+    <div class="form-group">
+      <label for="sessionDateTime">Session Date & Time</label>
+      <input
+        type="datetime-local"
+        id="sessionDateTime"
+        [(ngModel)]="classroom.sessionDateTime"
+        name="sessionDateTime"
+        required
+        #sessionDateTime="ngModel"
+      />
+      <div class="error" *ngIf="sessionDateTime.invalid && sessionDateTime.touched">
+        Please select a valid date and time.
+      </div>
+    </div>
+
+    <!-- Session Link -->
+    <div class="form-group">
+      <label for="sessionLink">Session Link</label>
+      <input
+        type="url"
+        id="sessionLink"
+        [(ngModel)]="classroom.sessionLink"
+        name="sessionLink"
+        required
+        #sessionLink="ngModel"
+        placeholder="https://example.com/session"
+      />
+      <div class="error" *ngIf="sessionLink.invalid && sessionLink.touched">
+        A valid session link is required.
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="form-actions">
+      <button type="submit" class="btn save" [disabled]="classroomForm.invalid">
+        💾 Save
+      </button>
+      <button type="button" class="btn cancel" routerLink="/view-classrooms">
+        ✖ Cancel
+      </button>
+    </div>
+  </form>
+</div>

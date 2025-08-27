@@ -1,0 +1,52 @@
+<div class="details-container">
+
+  <h2>📚 Classroom Details</h2>
+
+  <!-- Classroom Info Card -->
+  <div class="classroom-card" *ngIf="classroom as c">
+    <div class="card-header">
+      <span>Classroom ID: {{ c.id }}</span>
+      <a class="btn-back" routerLink="/view-classrooms">← Back</a>
+    </div>
+ 
+    <div class="card-body">
+      <div class="detail-row">
+        <span class="label">Course:</span>
+        <span class="value">{{ classroom.course.title }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Description:</span>
+        <span class="value">{{ classroom.course.description }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Teacher:</span>
+        <span class="value">{{ classroom.course.teacher.uname }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Session Date:</span>
+        <span class="value">{{ classroom.sessionDateTime | date:'MMM dd, yyyy, hh:mm:ss a' }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Session Link:</span>
+        <span class="value">
+          <a [href]="c.sessionLink" target="_blank" class="join-link">Join Session</a>
+        </span>
+      </div>
+    </div>
+
+  <!-- Present Students Card -->
+  <div class="students-card">
+    <h3>👥 Present Students</h3>
+    <ul *ngIf="c.presentStudents.length; else noStudents">
+      <li *ngFor="let student of c.presentStudents">
+        <span class="student-id">{{ student.id }}</span>
+        <span class="student-name">{{ student.uname }}</span>
+        <span class="student-email">{{ student.email }}</span>
+      </li>
+    </ul>
+    <ng-template #noStudents>
+      <p class="no-students">No students have attended yet.</p>
+    </ng-template>
+  </div>
+</div>
+</div>

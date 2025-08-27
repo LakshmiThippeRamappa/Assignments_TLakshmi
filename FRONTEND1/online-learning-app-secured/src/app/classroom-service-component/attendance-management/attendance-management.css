@@ -1,0 +1,158 @@
+.attendance-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 25px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Headings */
+h2 {
+  text-align: center;
+  color: #2e7d32;
+  margin-bottom: 25px;
+}
+
+h3 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Success & Error Messages */
+.alert {
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.alert.success {
+  background: #2ecc71;
+  color: white;
+}
+
+.alert.error {
+  background: #e74c3c;
+  color: white;
+}
+
+/* Mark Attendance Section */
+.mark-section {
+  margin-bottom: 30px;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.input-group button {
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s ease;
+}
+
+.btn-secondary {
+  background-color: #757575;
+}
+
+.btn-secondary:hover {
+  background-color: #616161;
+}
+
+.btn-success {
+  background-color: green;
+}
+
+.btn-success:hover {
+  background-color: #046e1f;
+}
+
+/* Attendance List */
+.list-section {
+  margin-top: 20px;
+}
+
+.list-header,
+.list-section ul li {
+  display: grid;
+  grid-template-columns: 80px 150px 250px 120px; /* Fixed column widths */
+  align-items: center;
+  padding: 10px 12px;
+}
+
+.list-header {
+  font-weight: bold;
+  background-color: #f1f1f1;
+  border-bottom: 2px solid #ccc;
+}
+
+.list-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-section ul li {
+  background: #f9f9f9;
+  border-bottom: 1px solid #eee;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  transition: 0.2s;
+}
+
+.list-section ul li:hover {
+  background: #f1f1f1;
+}
+
+/* Student Info */
+.student-id {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.student-name {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.student-email {
+  color: #555;
+  font-size: 14px;
+}
+
+/* Status Badges */
+.status {
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.status.present {
+  background: #c8e6c9;
+  color: #256029;
+}
+
+.status.absent {
+  background: #ffcdd2;
+  color: #c62828;
+}

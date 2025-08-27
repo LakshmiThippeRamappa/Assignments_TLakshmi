@@ -1,0 +1,129 @@
+.details-container {
+  max-width: 800px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+  text-align: center;
+  color: #2e7d32;
+  margin-bottom: 30px;
+}
+
+/* Classroom Card */
+.classroom-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.card-header {
+  background-color: #2e7d32;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.btn-back {
+  background-color: white;
+  color: #2e7d32;
+  padding: 5px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-back:hover {
+  background-color: #e0f2f1;
+}
+
+.card-body {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.detail-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 12px;
+}
+
+.label {
+  font-weight: bold;
+  width: 120px;
+  color: #333;
+}
+
+.value a.join-link {
+  color: white;
+  background-color: #2e7d32;
+  padding: 5px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.value a.join-link:hover {
+  background-color: #256029;
+}
+
+/* Students Card */
+.students-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.students-card h3 {
+  color: #2e7d32;
+  margin-bottom: 15px;
+}
+
+.students-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.students-card li {
+  display: grid;
+  grid-template-columns: 60px 150px 250px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  align-items: center;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  background-color: #f1f1f1;
+  transition: 0.2s;
+}
+
+.students-card li:hover {
+  background-color: #e0f2f1;
+}
+
+.student-id {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.student-name {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.student-email {
+  color: #555;
+}
+
+.no-students {
+  font-style: italic;
+  color: #999;
+}

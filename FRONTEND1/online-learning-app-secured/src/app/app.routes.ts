@@ -12,6 +12,12 @@ import { EditCourse } from './course-service-components/edit-course/edit-course'
 import { CourseDetails } from './course-service-components/course-details/course-details';
 import { DeleteCourse } from './course-service-components/delete-course/delete-course';
 import { EnrollStudent } from './course-service-components/enroll-student/enroll-student';
+import { ViewClassrooms } from './classroom-service-component/view-classrooms/view-classrooms';
+import { AddClassroom } from './classroom-service-component/add-classroom/add-classroom';
+import { EditClassroom } from './classroom-service-component/edit-classroom/edit-classroom';
+import { DeleteClassroom } from './classroom-service-component/delete-classroom/delete-classroom';
+import { ClassroomDetails } from './classroom-service-component/classroom-details/classroom-details';
+import { AttendanceManagement } from './classroom-service-component/attendance-management/attendance-management';
 
 export const routes: Routes = [
 
@@ -28,5 +34,12 @@ export const routes: Routes = [
      {path:'course-details/:id',component:CourseDetails},
      {path:'delete-course/:id',component:DeleteCourse},
      {path:'enroll-student',component:EnrollStudent},
-     {path:'enroll-student/:courseId',component:EnrollStudent}
+     {path:'enroll-student/:courseId',component:EnrollStudent},
+
+     {path:'view-classrooms',component:ViewClassrooms},
+     {path:'add-classroom',component:AddClassroom},
+     {path:'edit-classroom/:id',component:EditClassroom},
+     {path:'delete-classroom/:id',component:DeleteClassroom},
+     {path:'classroom-details/:id',component:ClassroomDetails},
+     {path:'attendance-management/:id/attendance',component:AttendanceManagement}
 ];
